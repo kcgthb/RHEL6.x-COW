@@ -1,10 +1,11 @@
 # Description
 
 These are instructions to fix the [Dirty COW](https://dirtycow.ninja) vulnerability on recent RHEL/CentOS 6.x versions.
-It has been verified to work on the following kernels:
-* RHEL/CentOS 6.7: `kernel-kernel-2.6.32-573.x`
-* RHEL/CentOS 6.6: `kernel-kernel-2.6.32-504.x`
-* RHEL/CentOS 6.5: `kernel-kernel-2.6.32-431.x`
+It has been verified to work on the following releases:
+* RHEL/CentOS 6.8: `kernel-2.6.32-642.x`
+* RHEL/CentOS 6.7: `kernel-2.6.32-573.x`
+* RHEL/CentOS 6.6: `kernel-2.6.32-504.x`
+* RHEL/CentOS 6.5: `kernel-2.6.32-431.x`
 
 ## What is this about?
 
