@@ -1,0 +1,27 @@
+--- kernel.spec.distro	2016-10-27 14:59:35.934210037 -0700
++++ kernel.spec	2016-10-27 14:59:35.766211382 -0700
+@@ -15,7 +15,7 @@
+ # that the kernel isn't the stock distribution kernel, for example,
+ # by setting the define to ".local" or ".bz123456"
+ #
+-# % define buildid .local
++%define buildid .noc0w
+ 
+ %define distro_build 573.12.1
+ %define signmodules 1
+@@ -610,6 +610,7 @@
+ Source85: config-powerpc64-debug-rhel
+ Source86: config-s390x-debug-rhel
+ 
++Patch40000: noc0w.patch
+ # empty final patch file to facilitate testing of kernel patches
+ Patch999999: linux-kernel-test.patch
+ 
+@@ -931,6 +932,7 @@
+ # Dynamically generate kernel .config files from config-* files
+ make -f %{SOURCE20} VERSION=%{version} configs
+ 
++ApplyOptionalPatch noc0w.patch
+ ApplyOptionalPatch linux-kernel-test.patch
+ 
+ # Any further pre-build tree manipulations happen here.
