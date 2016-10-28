@@ -1,10 +1,11 @@
 # Description
 
 These are instructions to fix the [Dirty COW](https://dirtycow.ninja) vulnerability on recent RHEL/CentOS 6.x versions.
-It has been verified to work on the following kernels:
-* RHEL/CentOS 6.7: `kernel-kernel-2.6.32-573.x`
-* RHEL/CentOS 6.6: `kernel-kernel-2.6.32-504.x`
-* RHEL/CentOS 6.5: `kernel-kernel-2.6.32-431.x`
+It has been verified to work on the following releases:
+* RHEL/CentOS 6.8: `kernel-2.6.32-642.x`
+* RHEL/CentOS 6.7: `kernel-2.6.32-573.x`
+* RHEL/CentOS 6.6: `kernel-2.6.32-504.x`
+* RHEL/CentOS 6.5: `kernel-2.6.32-431.x`
 
 ## What is this about?
 
@@ -29,7 +30,7 @@ First, we need the backported patch. Since CVE-2016-5195 is the only issue that 
 * `kernel-2.6.32-642.6.2.el6` includes the fix
 * `kernel-2.6.32-642.6.1.el6` is the version right before it
 
-To save you some time, the patch is here: https://github.com/kcgthb/cleancow/blob/master/noc0w.patch
+To save you some time, the patch is here: https://github.com/kcgthb/RHEL6.x-COW/blob/master/noc0w.patch
 
 But don't take my word for it, you should be able to extract it yourself with the following commands:
 ```
@@ -78,13 +79,13 @@ As a user, get the kernel configuration:
 ```
 Put your patch file in `~/rpmbuild/SOURCES`
 ```
-[user@host]$ wget -O ~/rpmbuild/SOURCES/noc0w.patch https://raw.githubusercontent.com/kcgthb/cleancow/master/noc0w.patch
+[user@host]$ wget -O ~/rpmbuild/SOURCES/noc0w.patch https://raw.githubusercontent.com/kcgthb/RHEL6.x-COW/master/noc0w.patch
 ```
-And then you need to edit the SPEC file. You can just apply https://github.com/kcgthb/cleancow/blob/master/kernel.spec.patch to the `kernel.spec` that should now be in `~/rpmbuild/`. It will create a `2.6.32-573.26.1,noc0w` kernel, but you can customize the SPEC file to use a different `buildid` or change the name of the patch.
+And then you need to edit the SPEC file. You can just apply https://github.com/kcgthb/RHEL6.x-COW/blob/master/kernel.spec.patch to the `kernel.spec` that should now be in `~/rpmbuild/`. It will create a `2.6.32-573.26.1,noc0w` kernel, but you can customize the SPEC file to use a different `buildid` or change the name of the patch.
 ```
 [user@host]$ cd ~/rpmbuild/SPECS/
 [user@host SPECS]$ cp kernel.spec kernel.spec.distro
-[user@host SPECS]$ wget https://github.com/kcgthb/cleancow/blob/master/kernel.spec.patch 
+[user@host SPECS]$ wget https://github.com/kcgthb/RHEL6.x-COW/blob/master/kernel.spec.patch 
 [user@host SPECS]$ patch -p0 < kernel.spec.patch
 ```
 Finally, you're ready to build your patched kernel:
