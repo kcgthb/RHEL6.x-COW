@@ -81,7 +81,7 @@ Put your patch file in `~/rpmbuild/SOURCES`
 ```
 [user@host]$ wget -O ~/rpmbuild/SOURCES/noc0w.patch https://raw.githubusercontent.com/kcgthb/RHEL6.x-COW/master/noc0w.patch
 ```
-And then you need to edit the SPEC file. You can just apply https://raw.githubusercontent.com/kcgthb/RHEL6.x-COW/master/kernel.spec.patch to the `kernel.spec` that should now be in `~/rpmbuild/`. It will create a `2.6.32-573.26.1,noc0w` kernel, but you can customize the SPEC file to use a different `buildid` or change the name of the patch.
+And then you need to edit the SPEC file. You can just apply https://github.com/kcgthb/RHEL6.x-COW/blob/master/kernel.spec.patch to the `kernel.spec` that should now be in `~/rpmbuild/`. It will create a `2.6.32-573.26.1,noc0w` kernel, but you can customize the SPEC file to use a different `buildid` or change the name of the patch.
 ```
 [user@host]$ cd ~/rpmbuild/SPECS/
 [user@host SPECS]$ cp kernel.spec kernel.spec.distro
