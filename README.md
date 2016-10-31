@@ -66,7 +66,7 @@ Now, as a regular user, you can download the kernel source and prepare the tree:
 ```
 [user@host]$ MY_KRN=2.6.32-573.26.1
 [user@host]$ mkdir -p ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-[user@host]$ echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros
+[user@host]$ echo '%_topdir %(echo $HOME)/rpmbuild' >> ~/.rpmmacros
 [user@host]$ rpm -i http://vault.centos.org/6.7/updates/Source/SPackages/kernel-${MY_KRN}.el6.src.rpm 2>&1 | grep -v exist
 [user@host]$ cd ~/rpmbuild/SPECS
 [user@host SPECS]$ rpmbuild -bp --target=$(uname -m) kernel.spec
@@ -89,12 +89,19 @@ Put your patch file in `~/rpmbuild/SOURCES`
 ```
 **NB**: this is for RHEL/CentOS 6.5 to 6.8. If you use an earlier release, you'll need to get the corresponding `6.x/noc0w.patch`
 
-And then you need to edit the SPEC file. You can just apply https://github.com/kcgthb/RHEL6.x-COW/blob/master/kernel.spec.patch to the `kernel.spec` that should now be in `~/rpmbuild/`. It will create a `2.6.32-573.26.1,noc0w` kernel, but you can customize the SPEC file to use a different `buildid` or change the name of the patch.
+And then you need to edit the SPEC file. You can just apply https://github.com/kcgthb/RHEL6.x-COW/blob/master/kernel.spec.patch to the `kernel.spec` that should now be in `~/rpmbuild/`. It will create a `2.6.32-573.26.1.noc0w` kernel, but you can customize the SPEC file to use a different `buildid` or change the name of the patch.
 ```
 [user@host]$ cd ~/rpmbuild/SPECS/
 [user@host SPECS]$ cp kernel.spec kernel.spec.distro
 [user@host SPECS]$ wget https://github.com/kcgthb/RHEL6.x-COW/blob/master/kernel.spec.patch 
 [user@host SPECS]$ patch -p0 < kernel.spec.patch
+```
+It's also a good idea to edit the `%changelog` section in `kernel.spec` to add an entry that describes the change, I used this:
+```
+%changelog
+* Mon Oct 24 2016 Kilian Cavalotti <kilian@stanford.edu> [2.6.32-573.12.1.noc0w.el6]
+- [security] fix for Dirty COW {CVE-2016-5195}
+
 ```
 Finally, you're ready to build your patched kernel:
 ```
