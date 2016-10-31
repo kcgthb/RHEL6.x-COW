@@ -129,5 +129,5 @@ Now you're ready to deploy and test your shiny new, super-secure kernel:
 [root@host rpmbuild]# yum localupdate RPMS/*/*.rpm
 ```
 
-Reboot, check that you're using the new kernel with `uname -r`, and have fun verifying that none of the exploits listed on https://github.com/dirtycow/dirtycow.github.io/wiki/PoCs works anymore.
+Reboot, check that you're using the new kernel with `uname -r`, and have fun verifying that none of the exploits listed on https://github.com/dirtycow/dirtycow.github.io/wiki/PoCs work anymore.
 
